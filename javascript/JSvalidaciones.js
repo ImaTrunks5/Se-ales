@@ -72,6 +72,8 @@ function redirigirAPestaña2() {
     var errorTelefono= document.getElementById('errorTelefono');
     var Correo=document.getElementById('floatingCorreo').value;
     var errorCorreo= document.getElementById('errorCorreo');
+    var Contra=document.getElementById('floatingContra').value;
+    var errorContra=document.getElementById('errorContra');
 
     if (!telReg.test(Telefono)) {
         errorTelefono.textContent='Por favor ingresa un número de telefono valido';
@@ -86,6 +88,7 @@ function redirigirAPestaña2() {
     } else {
         errorCorreo.textContent='';
     }
+    
 
     if (bandera === true) {
        var myTab = new bootstrap.Tab(document.querySelector('#pestañaProcedencia'));

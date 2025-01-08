@@ -21,7 +21,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "./php/procesarFormulario.php",
+                    url: "./Php/procesarFormulario.php",
                     data: datos,
                     success: function(respuesta) 
                     {
@@ -77,6 +77,7 @@
                     $("#CodigoPostal").text(valoresContacto[0]);
                     $("#Telefono").text(valoresContacto[1]);
                     $("#Correo").text(valoresContacto[2]);
+                    $("#Contra").text(valoresContacto[3]);
         
                     $('#checkDatos').modal('show');
                 } else {
@@ -111,8 +112,8 @@
     <div class="container">
         <div class="py-5 text-center">
             <img class="d-block mx-auto mb-4" src="./img/Corazon_login.jpg" id="LogoIPNhead" alt="LogoIPN" width="72" height="57">
-            <h1>Escuela Superior de Cómputo</h1>
-            <p class="lead">Ingresa los siguientes datos para que se te pueda asignar un horario para que puedas realizar tu examen diagnóstico.</p>
+            <h1 id="IPN">PoliTarios</h1>
+            <p class="lead">Ingresa los siguientes datos para completar su registro.</p>
         </div>
         <div class="row">
             <div class="col-12">
@@ -212,6 +213,11 @@
                                     <label for="floatingCorreo">Correo:</label>
                                     <span id="errorCorreo" class="error"></span>
                                 </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" name="Contra" id="floatingContra" class="form-control inputContacto" placeholder="Usa al menos 8 caracteres">
+                                    <label for="floatingContra">Contraseña:</label>
+                                    <span id="errorContra" class="error"></span>
+                                </div>
                             </fieldset>
                             <button type="button" class="btn btn-outline-primary" onclick="redirigirAPestaña2();">Siguiente</button>
                         </div>
@@ -245,6 +251,7 @@
                                             <b>Codigo Postal:</b><p id="CodigoPostal"></p>
                                             <b>Teléfono:</b><p id="Telefono"></p>
                                             <b>Correo:</b><p id="Correo"></p>
+                                            <b>Contraseña:</b><p id="Contra"></p>
                                             
                                         </div>
 
