@@ -30,7 +30,7 @@
                         if(respuesta == 1){
                             alert("No se guardaron los datos.");
                         } else {
-                            window.location.href = "./php " + respuesta;
+                            window.location.href = "./index.html";
                         }
                     },
                 });
@@ -223,8 +223,23 @@
                         </div>
                         <!-- Pestaña Procedencia -->
                         <div class="tab-pane fade" id="panelPestañaProcedencia" role="tabpanel" aria-labelledby="pestañaProcedencia" tabindex="0">
-                           
+                            <fieldset>
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Habilidades"  id="floatingHabilidades" class="form-control inputProcedencia" placeholder="Ingresa solo tus Habilidades">
+                                    <label for="floatingHabilidades">Habilidades:</label>
+                                    <span id="errorHabilidades" class="error"></span>
+                                </div>
                                 
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Experiencia"  id="floatingExperiencia" class="form-control inputProcedencia" placeholder="Ingresa solo tu Experiencia">
+                                    <label for="floatingExperiencia">Experiencia:</label>
+                                    <span id="errorExperiencia" class="error"></span>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="Intereses"  id="floatingIntereses" class="form-control inputProcedencia" placeholder="Ingresa solo tus Habilidades">
+                                    <label for="floatingIntereses">Intereses:</label>
+                                    <span id="errorIntereses" class="error"></span>
+                                </div>
                             </fieldset>
                             <button type="reset" class="btn btn-outline-danger">Limpiar</button>
                             <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#checkDatos" id="mostrarModal">Guardar</button>
