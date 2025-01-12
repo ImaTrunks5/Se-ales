@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+// Verifica si la sesión no está iniciada
+if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
+    // Si no está iniciada, redirige al login
+    header("Location: Index.html");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
