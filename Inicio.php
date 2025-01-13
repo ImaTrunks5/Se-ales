@@ -14,23 +14,160 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <title>.:Inicio - Voluntariado:.</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Krub:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .post {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            position: relative;
+        }
+        .btn-postular {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
     </style>
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    
-    <title>.::Incio::.</title>
 </head>
 <body>
-    
-    <div>Hola gente de youtube</div>
-
-    <footer>
-        <div class="text-center p-3">
-            © Página creada por Imanol, Arleth, Jorge, Ivan, Vanesa y Daniel.
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Voluntariado</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="link-feed" href="#">Todas las publicaciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="link-historial" href="#">Mi historial</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-danger" id="link-salir" href="./Php/logout.php">Salir</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </footer>
+    </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- Contenido principal -->
+    <div class="container mt-5">
+        <div id="contenido-feed">
+            <h1>Todas las publicaciones</h1>
+            <div id="feed"></div>
+        </div>
+
+        <div id="contenido-historial" class="d-none">
+            <h1>Mi historial de voluntariados</h1>
+            <div id="historial"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            cargarFeed();
+
+            $('#link-feed').click(function (e) {
+                e.preventDefault();
+                $('#contenido-feed').removeClass('d-none');
+                $('#contenido-historial').addClass('d-none');
+                cargarFeed();
+            });
+
+            $('#link-historial').click(function (e) {
+                e.preventDefault();
+                $('#contenido-historial').removeClass('d-none');
+                $('#contenido-feed').addClass('d-none');
+                cargarHistorial();
+            });
+
+            function cargarFeed() {
+                $.ajax({
+                    url: './Php/cargarFeed.php',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        const feed = $('#feed');
+                        feed.empty();
+                        data.forEach(post => {
+                            const postHtml = `
+                                <div class="post">
+                                    <h3>${post.nombre_proyecto}</h3>
+                                    <p>${post.descripcion}</p>
+                                    <p><strong>Fecha:</strong> ${post.fecha_inicio} - ${post.fecha_fin}</p>
+                                    <p><strong>Ubicación:</strong> ${post.Estado}, ${post.Municipio}</p>
+                                    <p><strong>Requisitos:</strong> ${post.requisitos}</p>
+                                    <p><strong>Organización:</strong> ${post.nombre_ong}</p>
+                                    <button class="btn btn-success btn-postular" onclick="postular(${post.idProyecto})">Postularse</button>
+                                </div>
+                            `;
+                            feed.append(postHtml);
+                        });
+                    },
+                    error: function () {
+                        alert('Error al cargar el feed de publicaciones.');
+                    }
+                });
+            }
+
+            function cargarHistorial() {
+    fetch("Php/cargarHistorial.php")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Error en la respuesta del servidor.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                throw new Error(data.error);
+            }
+
+            let historialDiv = document.getElementById("historial");
+            historialDiv.innerHTML = "";
+
+            data.forEach(item => {
+                let div = document.createElement("div");
+                div.innerHTML = `
+                    <h3>${item.nombre_proyecto}</h3>
+                    <p>${item.descripcion}</p>
+                    <p><strong>Inicio:</strong> ${item.fecha_inicio}</p>
+                    <p><strong>Fin:</strong> ${item.fecha_fin}</p>
+                `;
+                historialDiv.appendChild(div);
+            });
+        })
+        .catch(error => {
+            console.error("Error al cargar el historial:", error);
+            document.getElementById("historial").innerHTML = "Error al cargar el historial.";
+        });
+}
+
+
+
+            window.postular = function (idProyecto) {
+                $.ajax({
+                    url: './Php/postularse.php',
+                    method: 'POST',
+                    data: { idProyecto },
+                    success: function (response) {
+                        alert(response.message);
+                    },
+                    error: function () {
+                        alert('Error al postularse al proyecto.');
+                    }
+                });
+            };
+        });
+    </script>
 </body>
 </html>
