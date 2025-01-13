@@ -1,0 +1,18 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+ 
+.contenedor{
+    width: 420px;
+    /*background: transparent;*/
+    /*background: rgba(0, 0, 0, 0.5);*/
+    background: white;
+    border: 2px solid #3C9DDC;
+    color: black;
+    border-radius: 10px;
+    padding: 30px 30px;
+    text-align: center;
+}

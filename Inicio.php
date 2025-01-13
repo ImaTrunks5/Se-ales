@@ -14,6 +14,7 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./inicioU.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
     <title>.:Inicio - Voluntariado:.</title>
     <style>
@@ -21,7 +22,7 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
             font-family: 'Poppins', sans-serif;
         }
         .post {
-            border: 1px solid #ddd;
+            border: 2px solid #3C9DDC;
             padding: 15px;
             margin: 10px 0;
             border-radius: 5px;
@@ -38,7 +39,7 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Voluntariado</a>
+            <a class="navbar-brand" href="#">PoliTarios</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,7 +61,7 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
 
     <!-- Contenido principal -->
     <div class="container mt-5">
-        <div id="contenido-feed">
+        <div id="contenido-feed" >
             <h1>Todas las publicaciones</h1>
             <div id="feed"></div>
         </div>
@@ -100,7 +101,7 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
                         feed.empty();
                         data.forEach(post => {
                             const postHtml = `
-                                <div class="post">
+                                <div class="post container">
                                     <h3>${post.nombre_proyecto}</h3>
                                     <p>${post.descripcion}</p>
                                     <p><strong>Fecha:</strong> ${post.fecha_inicio} - ${post.fecha_fin}</p>
@@ -138,10 +139,15 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
             data.forEach(item => {
                 let div = document.createElement("div");
                 div.innerHTML = `
-                    <h3>${item.nombre_proyecto}</h3>
-                    <p>${item.descripcion}</p>
-                    <p><strong>Inicio:</strong> ${item.fecha_inicio}</p>
-                    <p><strong>Fin:</strong> ${item.fecha_fin}</p>
+                    <div class ="post">
+                        <h3>${item.nombre_proyecto}</h3>
+                        <p>${item.descripcion}</p>
+                        <p><strong>Inicio:</strong> ${item.fecha_inicio}</p>
+                        <p><strong>Fin:</strong> ${item.fecha_fin}</p>
+                        <p><strong>Ubicación:</strong> ${item.Estado}, ${item.Municipio}</p>
+                        <p><strong>Requisitos:</strong> ${item.requisitos}</p>
+                        <p><strong>Organización:</strong> ${item.nombre_ong}</p>
+                    </div>
                 `;
                 historialDiv.appendChild(div);
             });

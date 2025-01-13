@@ -13,6 +13,10 @@ include './conexion.php';
 
 $idUsuario = $_SESSION['idUsuario'];
 
+
+
+
+
 $sql = "SELECT p.nombre_proyecto, p.descripcion, p.fecha_inicio, p.fecha_fin 
         FROM voluntarios_proyectos vp
         INNER JOIN proyectos p ON vp.id_proyecto = p.idProyecto
