@@ -10,7 +10,7 @@
         $apellidoPaterno= $_POST['Apellido_Paterno'];
         $apellidoMaterno= $_POST['Apellido_Materno'];
         $curp= $_POST['CURP'];
-        $fechaNacimientos= $_POST['Fecha'];
+        $fechaNacimiento= $_POST['Fecha'];
         $genero=$_POST['generoRadio'];
 
         $entidadFederativa = $_POST['EntidadFederativa'];
