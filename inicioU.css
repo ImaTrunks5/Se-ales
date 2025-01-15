@@ -16,3 +16,14 @@
     padding: 30px 30px;
     text-align: center;
 }
+
+#IPN
+{
+    color: rgb(102, 17, 17);
+    font-style: inherit;
+}
+
+.navbar
+{
+    background-color: #e3f2fd;
+}

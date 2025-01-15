@@ -37,19 +37,19 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav  style="background-color: #0a4275 ;" class="navbar navbar-expand-lg navbar-light ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">PoliTarios</a>
+            <a class="navbar-brand " href="#" style=" color:rgb(255, 255, 255);">PoliTarios</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" id="link-feed" href="#">Todas las publicaciones</a>
+                        <a class="nav-link active" id="link-feed" href="#" style=" color:rgb(255, 255, 255);">Todas las publicaciones</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="link-historial" href="#">Mi historial</a>
+                        <a class="nav-link" id="link-historial" href="#" style=" color:rgb(255, 255, 255);">Mi historial</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-danger" id="link-salir" href="./Php/logout.php">Salir</a>
