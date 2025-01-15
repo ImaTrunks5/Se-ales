@@ -139,14 +139,15 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
             data.forEach(item => {
                 let div = document.createElement("div");
                 div.innerHTML = `
-                    <div class ="post">
+                    <div class="post">
                         <h3>${item.nombre_proyecto}</h3>
                         <p>${item.descripcion}</p>
                         <p><strong>Inicio:</strong> ${item.fecha_inicio}</p>
                         <p><strong>Fin:</strong> ${item.fecha_fin}</p>
-                        <p><strong>Ubicación:</strong> ${item.Estado}, ${item.Municipio}</p>
-                        <p><strong>Requisitos:</strong> ${item.requisitos}</p>
-                        <p><strong>Organización:</strong> ${item.nombre_ong}</p>
+                        <h4>Organización</h4>
+                        <p><strong>Nombre:</strong> ${item.nombre_organizacion}</p>
+                        <p><strong>Teléfono:</strong> ${item.telefono_organizacion}</p>
+                        <p><strong>Email:</strong> ${item.correo_organizacion}</p>
                     </div>
                 `;
                 historialDiv.appendChild(div);
@@ -160,19 +161,28 @@ if (!isset($_SESSION['idUsuario']) || !isset($_SESSION['email'])) {
 
 
 
-            window.postular = function (idProyecto) {
-                $.ajax({
-                    url: './Php/postularse.php',
-                    method: 'POST',
-                    data: { idProyecto },
-                    success: function (response) {
-                        alert(response.message);
-                    },
-                    error: function () {
-                        alert('Error al postularse al proyecto.');
-                    }
-                });
-            };
+window.postular = function (idProyecto) {
+    $.ajax({
+        url: './Php/postularse.php',
+        method: 'POST',
+        data: { idProyecto: idProyecto },
+        dataType: 'json',
+        success: function (response) {
+            if (response.message) {
+                alert(response.message);
+            } else {
+                alert("Respuesta inesperada del servidor.");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error en la solicitud:", error);
+            console.error("Respuesta del servidor:", xhr.responseText); // Muestra el contenido HTML recibido
+            alert('Error al postularse al proyecto. Revisa la consola para más detalles.');
+        }
+    });
+};
+
+
         });
     </script>
 </body>
